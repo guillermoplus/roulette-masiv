@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api
+namespace Roulette.Common
 {
     public class RouletteColor
     {

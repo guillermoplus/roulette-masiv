@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Api", "Roulette.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Infrastructure", "Roulette.Infrastructure\Roulette.Infrastructure.csproj", "{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Domain", "Roulette.Domain\Roulette.Domain.csproj", "{83F896F2-737B-44CF-BA59-A9FB85C2F176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Common", "Roulette.Common\Roulette.Common.csproj", "{0A37DC05-EB30-4534-A368-09CD8A663904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F896F2-737B-44CF-BA59-A9FB85C2F176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F896F2-737B-44CF-BA59-A9FB85C2F176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F896F2-737B-44CF-BA59-A9FB85C2F176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F896F2-737B-44CF-BA59-A9FB85C2F176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A37DC05-EB30-4534-A368-09CD8A663904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A37DC05-EB30-4534-A368-09CD8A663904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A37DC05-EB30-4534-A368-09CD8A663904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A37DC05-EB30-4534-A368-09CD8A663904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,20 +1,17 @@
-﻿using Roulette.Common;
+﻿using Roulette.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api.Models
+namespace Roulette.Infrastructure.Entities
 {
-    public class Bet
+    public class Winner : BaseEntity
     {
-        public long Id { get; set; }
         public long RouletteId { get; set; }
-        public double Amount { get; set; }
-        public RouletteColor.Color Color { get; set; }
-        public int Number { get; set; }
         public long UserId { get; set; }
+        public double Amount { get; set; }
         public DateTime Date { get; set; }
     }
 }

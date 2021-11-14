@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api.Models
+namespace Roulette.Infrastructure.Entities
 {
-    public class Bet
+    public class Bet : BaseEntity
     {
         public long Id { get; set; }
         public long RouletteId { get; set; }
