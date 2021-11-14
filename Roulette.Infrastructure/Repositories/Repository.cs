@@ -33,19 +33,19 @@ namespace RouletteMS.Infrastructure.Repositories
         {
             _entities.RemoveRange(entities);
         }
-        public async Task<EntityType> Find(Expression<Func<EntityType, bool>> expression)
+        public async Task<EntityType> FindAsync(Expression<Func<EntityType, bool>> expression)
         {
             return await _entities.FirstOrDefaultAsync(expression);
         }
-        public async Task<EntityType> Get(IdType id)
+        public async Task<EntityType> GetAsync(IdType id)
         {
             return await _entities.FindAsync(id);
         }
-        public async Task<IEnumerable<EntityType>> GetAll()
+        public async Task<IEnumerable<EntityType>> GetAllAsync()
         {
             return await _entities.ToListAsync();
         }
-        public async Task<IEnumerable<EntityType>> GetWhere(Expression<Func<EntityType, bool>> expression)
+        public async Task<IEnumerable<EntityType>> GetWhereAsync(Expression<Func<EntityType, bool>> expression)
         {
             return await _entities.Where(expression).ToListAsync();
         }

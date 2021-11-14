@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "RouletteMS.Domain": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ROULETTE_MIN_NUMBER": "0",
+        "MAX_AMOUNT_BET": "10000",
+        "WINNER_MULTIPLICATION_FACTOR": "5",
+        "ROULETTE_MAX_NUMBER": "36",
+        "COLOR_WINNER_MULTIPLICATION_FACTOR": "1.8"
+      }
+    }
+  }
+}
