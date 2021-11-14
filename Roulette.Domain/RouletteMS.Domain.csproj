@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UnitOfWork\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Roulette.Common\Roulette.Common.csproj" />
+    <ProjectReference Include="..\Roulette.Infrastructure\RouletteMS.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

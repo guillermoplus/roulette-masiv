@@ -1,15 +1,14 @@
-﻿using Roulette.Common;
+﻿using RouletteMS.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Infrastructure.Entities
+namespace RouletteMS.Infrastructure.Entities
 {
-    public class Bet : BaseEntity
+    public class Bet : BaseEntity<long>
     {
-        public long Id { get; set; }
         public long RouletteId { get; set; }
         public double Amount { get; set; }
         public RouletteColor.Color Color { get; set; }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Infrastructure.Entities
+namespace RouletteMS.Infrastructure.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<IdType> where IdType : struct
     {
-        public long Id { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public IdType Id { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime UpdatedOn { get; set; }
     }
 }

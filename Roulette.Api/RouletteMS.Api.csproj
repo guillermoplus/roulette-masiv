@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Roulette.Common\Roulette.Common.csproj" />
+    <ProjectReference Include="..\Roulette.Common\RouletteMS.Common.csproj" />
   </ItemGroup>
 
 

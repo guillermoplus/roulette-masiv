@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Infrastructure.Entities
+namespace RouletteMS.Infrastructure.Entities
 {
-    public class User : BaseEntity
+    public class User : BaseEntity<long>
     {
         public string Name { get; set; }
         public string Email { get; set; }

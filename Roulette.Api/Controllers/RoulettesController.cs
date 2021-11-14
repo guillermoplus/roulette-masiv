@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Roulette.Api.Models;
+using RouletteMS.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api.Controllers
+namespace RouletteMS.Api.Controllers
 {
     [Route("api/[controller]")]
     public class RoulettesController : ControllerBase
@@ -27,7 +27,7 @@ namespace Roulette.Api.Controllers
             return Ok();
         }
         [HttpPost("{id}/bet")]
-        public async Task<IActionResult> Bet(Bet model)
+        public async Task<IActionResult> Bet(BetModel model)
         {
             return Ok();
         }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Infrastructure.Entities
+namespace RouletteMS.Infrastructure.Entities
 {
-    public class Roulette : BaseEntity
+    public class Roulette : BaseEntity<long>
     {
         public bool IsOpen { get; set; }
         public double MaxAmountToBet { get; set; }

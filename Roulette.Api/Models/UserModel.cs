@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api.Models
+namespace RouletteMS.Api.Models
 {
-    public class User
+    public class UserModel
     {
         public long Id { get; set; }
         public string Name { get; set; }

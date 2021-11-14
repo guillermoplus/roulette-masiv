@@ -1,13 +1,13 @@
-﻿using Roulette.Infrastructure.Entities;
+﻿using RouletteMS.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Infrastructure.Entities
+namespace RouletteMS.Infrastructure.Entities
 {
-    public class Winner : BaseEntity
+    public class Winner : BaseEntity<long>
     {
         public long RouletteId { get; set; }
         public long UserId { get; set; }

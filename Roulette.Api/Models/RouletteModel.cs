@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Api.Models
+namespace RouletteMS.Api.Models
 {
-    public class Roulette
+    public class RouletteModel
     {
         public long Id { get; set; }
         public bool IsOpen { get; set; }
