@@ -10,7 +10,7 @@ namespace RouletteMS.Domain.Services.Interfaces
 {
     public interface IRouletteService
     {
-        long Create();
+        Task<long> Create();
         Task<bool> Open(long id);
         Task<IEnumerable<BetDto>> Close(long id);
         Task<bool> Bet(BetDto bet);

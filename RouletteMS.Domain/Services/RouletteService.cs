@@ -30,8 +30,7 @@ namespace RouletteMS.Domain.Services
                 return false;
             }
             _unitOfWork.BetRepository.Add(bet);
-            var result = await _unitOfWork.Complete();
-            _unitOfWork.Dispose();
+            var result = await _unitOfWork.SaveAsync();
             return result;
         }
         public async Task<IEnumerable<BetDto>> Close(long id)
@@ -41,23 +40,20 @@ namespace RouletteMS.Domain.Services
             roulette.ClosingDate = DateTime.UtcNow;
             var bets = await _unitOfWork.BetRepository.GetWhereAsync(x => x.RouletteId == id);
             SelectWinners(bets);
-            await _unitOfWork.Complete();
-            _unitOfWork.Dispose();
+            await _unitOfWork.SaveAsync();
             var betDtos = _mapper.Map<IEnumerable<BetDto>>(bets);
             return betDtos;
         }
-        public long Create()
+        public async Task<long> Create()
         {
             var roulette = new Roulette();
             _unitOfWork.RouletteRepository.Add(roulette);
-            _unitOfWork.Complete();
-            _unitOfWork.Dispose();
+            await _unitOfWork.SaveAsync();
             return roulette.Id;
         }
         public async Task<IEnumerable<RouletteDto>> GetAll()
         {
             var roulettes = await _unitOfWork.RouletteRepository.GetAllAsync();
-            _unitOfWork.Dispose();
             var rouletteDtos = _mapper.Map<IEnumerable<RouletteDto>>(roulettes);
             return rouletteDtos;
         }
@@ -67,8 +63,7 @@ namespace RouletteMS.Domain.Services
             if (roulette == null) return false;
             roulette.IsOpen = true;
             roulette.OpeningDate = DateTime.UtcNow;
-            var result = await _unitOfWork.Complete();
-            _unitOfWork.Dispose();
+            var result = await _unitOfWork.SaveAsync();
             return result;
         }
         private void SelectWinners(IEnumerable<Bet> bets)

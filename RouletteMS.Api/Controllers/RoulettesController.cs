@@ -26,7 +26,7 @@ namespace RouletteMS.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            var rouletteId = _rouletteService.Create();
+            var rouletteId = await _rouletteService.Create();
             return Ok(rouletteId);
         }
         [HttpPatch("{id}/open")]

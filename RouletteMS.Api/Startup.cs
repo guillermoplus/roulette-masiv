@@ -9,6 +9,7 @@ using RouletteMS.Domain.Services;
 using RouletteMS.Domain.Services.Interfaces;
 using RouletteMS.Infrastructure.DataContext;
 using RouletteMS.Infrastructure.Repositories;
+using RouletteMS.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,10 @@ namespace RouletteMS.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var con = Configuration.GetConnectionString("RouletteContext");
+
             services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>))
+                    .AddScoped<IUnitOfWork, UnitOfWork>()
                     .AddScoped<IRouletteService, RouletteService>();
             services.AddDbContext<RouletteContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RouletteContext")));
             services.AddAutoMapper(typeof(Startup));

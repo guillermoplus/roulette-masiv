@@ -12,30 +12,40 @@ namespace RouletteMS.Infrastructure.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         #region Repositories
-        private IGenericRepository<Roulette, long> _rouletteRepository;
-        private IGenericRepository<Bet, long> _betRepository;
-        private IGenericRepository<Winner, long> _winnerRepository;
-        private IGenericRepository<User, long> _userRepository;
-        public IGenericRepository<Roulette, long> RouletteRepository => _rouletteRepository ?? new GenericRepository<Roulette, long>(_context);
-        public IGenericRepository<Bet, long> BetRepository => _betRepository ?? new GenericRepository<Bet, long>(_context);
-        public IGenericRepository<Winner, long> WinnerRepository => _winnerRepository ?? new GenericRepository<Winner, long>(_context);
-        public IGenericRepository<User, long> UserRepository => _userRepository ?? new GenericRepository<User, long>(_context);
+        private IGenericRepository<Roulette, long> rouletteRepository;
+        private IGenericRepository<Bet, long> betRepository;
+        private IGenericRepository<Winner, long> winnerRepository;
+        private IGenericRepository<User, long> userRepository;
+        public IGenericRepository<Roulette, long> RouletteRepository => rouletteRepository ?? new GenericRepository<Roulette, long>(_context);
+        public IGenericRepository<Bet, long> BetRepository => betRepository ?? new GenericRepository<Bet, long>(_context);
+        public IGenericRepository<Winner, long> WinnerRepository => winnerRepository ?? new GenericRepository<Winner, long>(_context);
+        public IGenericRepository<User, long> UserRepository => userRepository ?? new GenericRepository<User, long>(_context);
         #endregion
         #region Constructor
         private readonly RouletteContext _context;
+        private bool disposed = false;
         public UnitOfWork(RouletteContext context)
         {
             _context = context;
         }
         #endregion
         #region Methods
-        public async Task<bool> Complete()
+        public async Task<bool> SaveAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed && disposing)
+            {
+                _context.Dispose();
+            }
+            disposed = true;
+        }
         public void Dispose()
         {
-            _context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
         #endregion
     }

@@ -14,6 +14,6 @@ namespace RouletteMS.Infrastructure.UnitOfWork
         IGenericRepository<Bet, long> BetRepository { get; }
         IGenericRepository<Winner, long> WinnerRepository { get; }
         IGenericRepository<User, long> UserRepository { get; }
-        Task<bool> Complete();
+        Task<bool> SaveAsync();
     }
 }
