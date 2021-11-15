@@ -10,10 +10,10 @@ namespace RouletteMS.Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Roulette, long> RouletteRepository { get; }
-        IRepository<Bet, long> BetRepository { get; }
-        IRepository<Winner, long> WinnerRepository { get; }
-        IRepository<User, long> UserRepository { get; }
+        IGenericRepository<Roulette, long> RouletteRepository { get; }
+        IGenericRepository<Bet, long> BetRepository { get; }
+        IGenericRepository<Winner, long> WinnerRepository { get; }
+        IGenericRepository<User, long> UserRepository { get; }
         Task<bool> Complete();
     }
 }

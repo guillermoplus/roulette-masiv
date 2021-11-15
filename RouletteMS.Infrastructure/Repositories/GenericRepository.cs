@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace RouletteMS.Infrastructure.Repositories
 {
-    public class Repository<EntityType, IdType> : IRepository<EntityType, IdType> where EntityType : class, new()
+    public class GenericRepository<EntityType, IdType> : IGenericRepository<EntityType, IdType> where EntityType : class, new()
     {
         private readonly RouletteContext _context;
         private readonly DbSet<EntityType> _entities;
-        public Repository(RouletteContext context)
+        public GenericRepository(RouletteContext context)
         {
             _context = context;
             _entities = _context.Set<EntityType>();

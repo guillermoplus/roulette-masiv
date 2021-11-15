@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RouletteMS.Infrastructure.Repositories
 {
-    public interface IRepository<EntityType, IdType> where EntityType : class, new()
+    public interface IGenericRepository<EntityType, IdType> where EntityType : class, new()
     {
         Task<EntityType> GetAsync(IdType id);
         Task<EntityType> FindAsync(Expression<Func<EntityType, bool>> expression);

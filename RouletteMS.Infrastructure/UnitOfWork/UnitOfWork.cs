@@ -12,14 +12,14 @@ namespace RouletteMS.Infrastructure.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         #region Repositories
-        private IRepository<Roulette, long> _rouletteRepository;
-        private IRepository<Bet, long> _betRepository;
-        private IRepository<Winner, long> _winnerRepository;
-        private IRepository<User, long> _userRepository;
-        public IRepository<Roulette, long> RouletteRepository => _rouletteRepository ?? new Repository<Roulette, long>(_context);
-        public IRepository<Bet, long> BetRepository => _betRepository ?? new Repository<Bet, long>(_context);
-        public IRepository<Winner, long> WinnerRepository => _winnerRepository ?? new Repository<Winner, long>(_context);
-        public IRepository<User, long> UserRepository => _userRepository ?? new Repository<User, long>(_context);
+        private IGenericRepository<Roulette, long> _rouletteRepository;
+        private IGenericRepository<Bet, long> _betRepository;
+        private IGenericRepository<Winner, long> _winnerRepository;
+        private IGenericRepository<User, long> _userRepository;
+        public IGenericRepository<Roulette, long> RouletteRepository => _rouletteRepository ?? new GenericRepository<Roulette, long>(_context);
+        public IGenericRepository<Bet, long> BetRepository => _betRepository ?? new GenericRepository<Bet, long>(_context);
+        public IGenericRepository<Winner, long> WinnerRepository => _winnerRepository ?? new GenericRepository<Winner, long>(_context);
+        public IGenericRepository<User, long> UserRepository => _userRepository ?? new GenericRepository<User, long>(_context);
         #endregion
         #region Constructor
         private readonly RouletteContext _context;
