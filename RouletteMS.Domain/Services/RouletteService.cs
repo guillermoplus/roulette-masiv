@@ -38,7 +38,7 @@ namespace RouletteMS.Domain.Services
         {
             var roulette = await _unitOfWork.RouletteRepository.GetAsync(id);
             roulette.IsOpen = false;
-            roulette.ClosingDate = DateTime.Now;
+            roulette.ClosingDate = DateTime.UtcNow;
             var bets = await _unitOfWork.BetRepository.GetWhereAsync(x => x.RouletteId == id);
             SelectWinners(bets);
             await _unitOfWork.Complete();
@@ -66,7 +66,7 @@ namespace RouletteMS.Domain.Services
             var roulette = await _unitOfWork.RouletteRepository.GetAsync(id);
             if (roulette == null) return false;
             roulette.IsOpen = true;
-            roulette.OpeningDate = DateTime.Now;
+            roulette.OpeningDate = DateTime.UtcNow;
             var result = await _unitOfWork.Complete();
             _unitOfWork.Dispose();
             return result;

@@ -18,6 +18,6 @@ namespace RouletteMS.Infrastructure.Entities
         public int? Number { get; set; } = null;
         [Required]
         public long UserId { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.UtcNow;
     }
 }
