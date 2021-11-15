@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 
 namespace RouletteMS.Domain.Mapper
 {
-    public class BaseProfile<Entity, Dto> : Profile
+    public class BaseProfile : Profile
     {
         public BaseProfile()
         {
-            CreateMap<Entity, Dto>();
+            CreateMap<Roulette, RouletteDto>();
+            CreateMap<RouletteDto, Roulette>();
+            CreateMap<Bet, BetDto>();
+            CreateMap<User, UserDto>();
+            CreateMap<Winner, WinnerDto>();
         }
     }
 }

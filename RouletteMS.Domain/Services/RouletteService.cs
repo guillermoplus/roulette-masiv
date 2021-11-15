@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using RouletteMS.Common;
 using RouletteMS.Common.AppParameters;
 using RouletteMS.Domain.Dtos;
@@ -57,7 +58,9 @@ namespace RouletteMS.Domain.Services
         public async Task<IEnumerable<RouletteDto>> GetAll()
         {
             var roulettes = await _unitOfWork.RouletteRepository.GetAllAsync();
-            var rouletteDtos = _mapper.Map<IEnumerable<RouletteDto>>(roulettes);
+            var rouletteDtos = roulettes.AsQueryable()
+                .ProjectTo<RouletteDto>(new MapperConfiguration(config => config.CreateMap<Roulette, RouletteDto>()))
+                .AsEnumerable();
             return rouletteDtos;
         }
         public async Task<bool> Open(long id)
