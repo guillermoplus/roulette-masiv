@@ -5,6 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RouletteMS.Domain.Services;
+using RouletteMS.Domain.Services.Interfaces;
+using RouletteMS.Infrastructure.DataContext;
+using RouletteMS.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +28,11 @@ namespace RouletteMS.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRouletteService, RouletteService>()
+                .AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+
+            services.AddDbContext<RouletteContext>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
         }
 

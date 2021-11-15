@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RouletteMS.Api", "Roulette.Api\RouletteMS.Api.csproj", "{5D0A6033-B521-420E-A273-8ED0BD04DE88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RouletteMS.Api", "RouletteMS.Api\RouletteMS.Api.csproj", "{5D0A6033-B521-420E-A273-8ED0BD04DE88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Infrastructure", "Roulette.Infrastructure\RouletteMS.Infrastructure.csproj", "{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Infrastructure", "RouletteMS.Infrastructure\RouletteMS.Infrastructure.csproj", "{4FE9CC93-9992-4F75-9D2A-CD4CD0CB62EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Domain", "Roulette.Domain\RouletteMS.Domain.csproj", "{83F896F2-737B-44CF-BA59-A9FB85C2F176}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Domain", "RouletteMS.Domain\RouletteMS.Domain.csproj", "{83F896F2-737B-44CF-BA59-A9FB85C2F176}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Common", "Roulette.Common\RouletteMS.Common.csproj", "{0A37DC05-EB30-4534-A368-09CD8A663904}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouletteMS.Common", "RouletteMS.Common\RouletteMS.Common.csproj", "{0A37DC05-EB30-4534-A368-09CD8A663904}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

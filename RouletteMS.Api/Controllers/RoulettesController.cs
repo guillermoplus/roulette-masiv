@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RouletteMS.Api.Models;
+using RouletteMS.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,28 @@ namespace RouletteMS.Api.Controllers
     [Route("api/[controller]")]
     public class RoulettesController : ControllerBase
     {
+        private readonly IRouletteService _rouletteService;
+        public RoulettesController(IRouletteService rouletteService)
+        {
+            _rouletteService = rouletteService;
+        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var roulettes = await _rouletteService.GetAll();
+            return Ok(roulettes);
         }
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            return Ok();
+            var rouletteId = _rouletteService.Create();
+            return Ok(rouletteId);
         }
         [HttpPatch("{id}/open")]
-        public async Task<IActionResult> Open()
+        public async Task<IActionResult> Open(long id)
         {
-            return Ok();
+            var state = await _rouletteService.Open(id);
+            return Ok(state);
         }
         [HttpPost("{id}/bet")]
         public async Task<IActionResult> Bet(BetModel model)
@@ -32,9 +41,10 @@ namespace RouletteMS.Api.Controllers
             return Ok();
         }
         [HttpPatch("{id}/close")]
-        public async Task<IActionResult> Close()
+        public async Task<IActionResult> Close(long id)
         {
-            return Ok();
+            var bets = await _rouletteService.Close(id);
+            return Ok(bets);
         }
     }
 }

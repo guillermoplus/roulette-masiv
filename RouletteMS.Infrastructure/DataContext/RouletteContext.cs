@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace RouletteMS.Infrastructure.DataContext
 {
     public class RouletteContext: DbContext
     {
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("Roulette");
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

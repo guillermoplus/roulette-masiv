@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RouletteMS.Infrastructure.Entities
+namespace RouletteMS.Domain.Dtos
 {
-    public class Bet : BaseEntity<long>
+    public class BetDto
     {
+        public long Id { get; set; }
         public long RouletteId { get; set; }
         public double Amount { get; set; }
-        public RouletteColor.Color? Color { get; set; } = null;
-        public int? Number { get; set; } = null;
+        public RouletteColor.Color? Color { get; set; }
+        public int? Number { get; set; }
         public long UserId { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; }
     }
 }
