@@ -10,9 +10,9 @@ namespace RouletteMS.Api.Models
     {
         public long Id { get; set; }
         public bool IsOpen { get; set; }
-        public double MaxAmountToBet { get; set; }
-        public double TotalAmountBet { get; set; }
-        public double TotalAmountDelivered { get; set; }
+        public double? MaxAmountToBet { get; set; }
+        public double? TotalAmountBet { get; set; }
+        public double? TotalAmountDelivered { get; set; }
         public DateTime OpeningDate { get; set; }
         public DateTime ClosingDate { get; set; }
     }

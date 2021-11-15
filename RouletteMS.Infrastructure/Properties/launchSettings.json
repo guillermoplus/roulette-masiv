@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "RouletteMS.Domain": {
+    "RouletteMS.Infrastructure": {
       "commandName": "Project",
       "environmentVariables": {
       }

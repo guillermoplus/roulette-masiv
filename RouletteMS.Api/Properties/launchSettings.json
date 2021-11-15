@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/RouletteMS.Api",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:20592",
       "sslPort": 0
@@ -11,17 +15,18 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "RouletteMS.Api": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "/",
       "environmentVariables": {
+        "ROULETTE_MIN_NUMBER": "0",
+        "MAX_AMOUNT_BET": "10000",
+        "WINNER_MULTIPLICATION_FACTOR": "5",
+        "ROULETTE_MAX_NUMBER": "36",
+        "COLOR_WINNER_MULTIPLICATION_FACTOR": "1.8",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000"

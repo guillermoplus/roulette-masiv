@@ -12,6 +12,5 @@ namespace RouletteMS.Infrastructure.Entities
         public long RouletteId { get; set; }
         public long UserId { get; set; }
         public double Amount { get; set; }
-        public DateTime Date { get; set; }
     }
 }

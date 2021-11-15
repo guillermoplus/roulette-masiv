@@ -46,7 +46,10 @@ namespace RouletteMS.Domain.Services
         }
         public async Task<long> Create()
         {
-            var roulette = new Roulette();
+            var roulette = new Roulette
+            {
+                MaxAmountToBet = RouletteParameters.MAX_AMOUNT_BET
+            };
             _unitOfWork.RouletteRepository.Add(roulette);
             await _unitOfWork.SaveAsync();
             return roulette.Id;
@@ -97,8 +100,9 @@ namespace RouletteMS.Domain.Services
         private async Task<bool> InvalidBet(Bet bet)
         {
             var roulette = await _unitOfWork.RouletteRepository.GetAsync(bet.RouletteId);
+            var maxAmountBet = roulette.MaxAmountToBet ?? RouletteParameters.MAX_AMOUNT_BET;
             return !roulette.IsOpen ||
-                   bet.Amount > RouletteParameters.MAX_AMOUNT_BET ||
+                   bet.Amount > maxAmountBet ||
                    !(RouletteParameters.ROULETTE_MIN_NUMBER <= bet.Number && bet.Number <= RouletteParameters.ROULETTE_MAX_NUMBER) ||
                    (bet.Number == null && bet.Color.Equals(null)) ||
                    (bet.Number != null && bet.Color.Equals(null));
