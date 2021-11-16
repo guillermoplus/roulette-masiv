@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using RouletteMS.Common;
 using RouletteMS.Common.AppParameters;
 using RouletteMS.Domain.Dtos;
+using RouletteMS.Domain.Mapper;
 using RouletteMS.Domain.Services.Interfaces;
 using RouletteMS.Infrastructure.Entities;
 using RouletteMS.Infrastructure.UnitOfWork;
@@ -17,15 +18,13 @@ namespace RouletteMS.Domain.Services
     public class RouletteService : IRouletteService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         public RouletteService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
         public async Task<bool> Bet(BetDto betDto)
         {
-            var bet = _mapper.Map<Bet>(betDto);
+            var bet = MapperHelper.GetMapper().Map<Bet>(betDto);
             if (await InvalidBet(bet))
             {
                 return false;
@@ -37,12 +36,21 @@ namespace RouletteMS.Domain.Services
         public async Task<IEnumerable<BetDto>> Close(long id)
         {
             var roulette = await _unitOfWork.RouletteRepository.GetAsync(id);
+            if (roulette == null)
+            {
+                return null;
+            }
+            if (!roulette.IsOpen)
+            {
+                return null;
+            }
+            var bets = await _unitOfWork.BetRepository.GetWhereAsync(x => x.RouletteId == id);
+            SelectWinners(bets); // TODO Retorna un enumerable con los ganadores o info dinero a restar
             roulette.IsOpen = false;
             roulette.ClosingDate = DateTime.UtcNow;
-            var bets = await _unitOfWork.BetRepository.GetWhereAsync(x => x.RouletteId == id);
-            SelectWinners(bets);
+            // TODO Agregar los valores a atributos total amount
             await _unitOfWork.SaveAsync();
-            var betDtos = _mapper.Map<IEnumerable<BetDto>>(bets);
+            var betDtos = bets.AsQueryable().ProjectTo<BetDto>(MapperHelper.GetConfig()).AsEnumerable();
             return betDtos;
         }
         public async Task<long> Create()
@@ -59,14 +67,21 @@ namespace RouletteMS.Domain.Services
         {
             var roulettes = await _unitOfWork.RouletteRepository.GetAllAsync();
             var rouletteDtos = roulettes.AsQueryable()
-                .ProjectTo<RouletteDto>(new MapperConfiguration(config => config.CreateMap<Roulette, RouletteDto>()))
+                .ProjectTo<RouletteDto>(MapperHelper.GetConfig())
                 .AsEnumerable();
             return rouletteDtos;
         }
         public async Task<bool> Open(long id)
         {
             var roulette = await _unitOfWork.RouletteRepository.GetAsync(id);
-            if (roulette == null) return false;
+            if (roulette == null)
+            {
+                return false;
+            }
+            if (roulette.IsOpen)
+            {
+                return true;
+            }
             roulette.IsOpen = true;
             roulette.OpeningDate = DateTime.UtcNow;
             var result = await _unitOfWork.SaveAsync();
@@ -108,7 +123,7 @@ namespace RouletteMS.Domain.Services
                    bet.Amount > maxAmountBet ||
                    !(RouletteParameters.ROULETTE_MIN_NUMBER <= bet.Number && bet.Number <= RouletteParameters.ROULETTE_MAX_NUMBER) ||
                    (bet.Number == null && bet.Color.Equals(null)) ||
-                   (bet.Number != null && bet.Color.Equals(null));
+                   (bet.Number != null && !bet.Color.Equals(null));
         }
     }
 }

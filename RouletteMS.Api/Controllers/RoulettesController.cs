@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RouletteMS.Api.Models;
+using RouletteMS.Domain.Dtos;
 using RouletteMS.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,14 @@ namespace RouletteMS.Api.Controllers
             return Ok(state);
         }
         [HttpPost("{id}/bet")]
-        public async Task<IActionResult> Bet(BetModel model)
+        public async Task<IActionResult> Bet([FromBody] BetDto betDto, [FromHeader] string userId)
         {
-            return Ok();
+            betDto.UserId = long.Parse(userId);
+            if (await _rouletteService.Bet(betDto))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
         }
         [HttpPatch("{id}/close")]
         public async Task<IActionResult> Close(long id)
