@@ -45,10 +45,12 @@ namespace RouletteMS.Domain.Services
                 return null;
             }
             var bets = await _unitOfWork.BetRepository.GetWhereAsync(x => x.RouletteId == id);
-            SelectWinners(bets); // TODO Retorna un enumerable con los ganadores o info dinero a restar
+            var winners = SelectWinners(bets);
+            _unitOfWork.WinnerRepository.AddRange(winners);
             roulette.IsOpen = false;
             roulette.ClosingDate = DateTime.UtcNow;
-            // TODO Agregar los valores a atributos total amount
+            roulette.TotalAmountBet = bets.Select(x => x.Amount).Sum();
+            roulette.TotalAmountDelivered = winners.Select(x => x.Amount).Sum();
             await _unitOfWork.SaveAsync();
             var betDtos = bets.AsQueryable().ProjectTo<BetDto>(MapperHelper.GetConfig()).AsEnumerable();
             return betDtos;
@@ -87,17 +89,16 @@ namespace RouletteMS.Domain.Services
             var result = await _unitOfWork.SaveAsync();
             return result;
         }
-        private void SelectWinners(IEnumerable<Bet> bets)
+        private IEnumerable<Winner> SelectWinners(IEnumerable<Bet> bets)
         {
             var winnerNumber = new Random().Next(0, 36);
-            var winnerBets = bets.Where(x => x.Number == winnerNumber);
-            var winners = winnerBets.Select(x => new Winner
+            var numericWinnerBets = bets.Where(x => x.Number == winnerNumber);
+            var numericWinners = numericWinnerBets.Select(x => new Winner
             {
                 Amount = x.Amount * RouletteParameters.WINNER_MULTIPLICATION_FACTOR,
                 RouletteId = x.RouletteId,
                 UserId = x.UserId
             });
-            _unitOfWork.WinnerRepository.AddRange(winners);
             var colorWinnerBets = bets.Where(x => GetColor(x.Number) == GetColor(winnerNumber));
             var colorWinners = colorWinnerBets.Select(x => new Winner
             {
@@ -105,7 +106,8 @@ namespace RouletteMS.Domain.Services
                 RouletteId = x.RouletteId,
                 UserId = x.UserId
             });
-            _unitOfWork.WinnerRepository.AddRange(colorWinners);
+            var winners = numericWinners.Concat(colorWinners);
+            return winners;
         }
         private RouletteColor.Color GetColor(int? number)
         {
