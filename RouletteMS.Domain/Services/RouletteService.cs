@@ -91,7 +91,7 @@ namespace RouletteMS.Domain.Services
         }
         private IEnumerable<Winner> SelectWinners(IEnumerable<Bet> bets)
         {
-            var winnerNumber = new Random().Next(0, 36);
+            var winnerNumber = new Random().Next(RouletteParameters.ROULETTE_MIN_NUMBER, RouletteParameters.ROULETTE_MAX_NUMBER);
             var numericWinnerBets = bets.Where(x => x.Number == winnerNumber);
             var numericWinners = numericWinnerBets.Select(x => new Winner
             {
